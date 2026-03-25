@@ -169,7 +169,7 @@ Agent-Skill（原子能力层，17个 Skill）
 | 异常查找 | ScanningView | 扫描动画 → 完成提示 |
 | 异常结果 | ResultView | 检测卡片网格，支持删除/修改分类 |
 | 智能派单 | DispatchView | 派单表格 + 接收方选择 |
-| 数据检索 | SearchView（=ScanningView）| 数据检索进度 |
+| 数据检索 | SearchView | 数据检索进度（复用 ScanningView 组件样式，语义独立）|
 | 报告生成 | ReportView | 图表 + 明细表 + 导出 |
 
 **"执行下一步动作"按钮：**
