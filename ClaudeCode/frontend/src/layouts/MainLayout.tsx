@@ -1,26 +1,63 @@
-import { Layout } from "antd";
-import AgentNav from "../components/AgentNav/AgentNav";
-import ChatPanel from "../components/Chat/ChatPanel";
-import CanvasPanel from "../components/Canvas/CanvasPanel";
-
-const { Sider, Content } = Layout;
+import { useTaskStore } from '../stores/taskStore';
+import AgentNav from '../components/AgentNav/AgentNav';
+import ChatPanel from '../components/Chat/ChatPanel';
+import CanvasPanel from '../components/Canvas/CanvasPanel';
 
 export default function MainLayout() {
+  const canvasVisible = useTaskStore(s => (s as any).canvasVisible ?? false);
+
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Sider width={240} theme="light" style={{ borderRight: "1px solid #f0f0f0" }}>
+    <div style={{
+      display: 'flex',
+      height: '100vh',
+      background: 'var(--color-bg-base)',
+      overflow: 'hidden',
+    }}>
+      {/* Left sidebar */}
+      <div style={{
+        width: 'var(--sidebar-width)',
+        flexShrink: 0,
+        background: 'var(--color-bg-sidebar)',
+        borderRight: '1px solid var(--color-border)',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        overflow: 'hidden',
+      }}>
         <AgentNav />
-      </Sider>
-      <Layout>
-        <Content style={{ display: "flex", height: "100%" }}>
-          <div style={{ flex: "0 0 400px", borderRight: "1px solid #f0f0f0", display: "flex", flexDirection: "column" }}>
-            <ChatPanel />
-          </div>
-          <div style={{ flex: 1, overflow: "auto" }}>
-            <CanvasPanel />
-          </div>
-        </Content>
-      </Layout>
-    </Layout>
+      </div>
+
+      {/* Chat panel - fixed width when canvas open, flex-1 when closed */}
+      <div style={{
+        width: canvasVisible ? 'var(--chat-width)' : undefined,
+        flex: canvasVisible ? 'none' : '1',
+        flexShrink: 0,
+        borderRight: canvasVisible ? '1px solid var(--color-border)' : 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        overflow: 'hidden',
+        transition: 'width 0.25s ease-out',
+      }}>
+        <ChatPanel />
+      </div>
+
+      {/* Canvas panel - conditionally shown */}
+      {canvasVisible && (
+        <div
+          className="canvas-slide-in"
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100vh',
+            overflow: 'hidden',
+            background: 'var(--color-bg-base)',
+          }}
+        >
+          <CanvasPanel />
+        </div>
+      )}
+    </div>
   );
 }

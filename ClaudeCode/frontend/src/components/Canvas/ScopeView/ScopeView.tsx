@@ -46,17 +46,17 @@ export default function ScopeView() {
   }, [cameras, selectedEventTypes, queryFilter]);
 
   return (
-    <div style={{ padding: 16, display: "flex", gap: 16, height: "100%" }}>
+    <div style={{ padding: 16, display: "flex", gap: 16, height: "100%", background: '#08080F' }}>
       <div style={{ flex: 1, minHeight: 400 }}>
-        <Typography.Title level={5}>扫描范围地图</Typography.Title>
+        <Typography.Title level={5} style={{ color: '#F1F5F9', marginBottom: 12 }}>扫描范围地图</Typography.Title>
         <MapContainer style={{ height: "calc(100% - 40px)" }} />
       </div>
       <div style={{ width: 360, overflow: "auto" }}>
-        <Typography.Title level={5}>任务配置</Typography.Title>
-        <Typography.Paragraph type="secondary">
+        <Typography.Title level={5} style={{ color: '#F1F5F9', marginBottom: 6 }}>任务配置</Typography.Title>
+        <Typography.Paragraph style={{ color: '#94A3B8', marginBottom: 12 }}>
           {activeTask?.agentLabel} - {activeTask?.description}
         </Typography.Paragraph>
-        <Divider />
+        <Divider style={{ borderColor: 'rgba(255,255,255,0.08)', margin: '12px 0' }} />
         {isCityPatrol && (
           <EventTypeSelector
             selected={selectedEventTypes}

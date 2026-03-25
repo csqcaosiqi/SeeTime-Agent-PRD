@@ -1,7 +1,15 @@
 import { create } from "zustand";
 
 export type MessageRole = "user" | "system" | "agent";
-export type MessageType = "text" | "progress" | "step_complete" | "error";
+export type MessageType =
+  | "text"
+  | "thinking"
+  | "task_card"
+  | "skill_progress"
+  | "conclusion"
+  | "progress"
+  | "step_complete"
+  | "error";
 
 export interface ChatMessage {
   id: string;
@@ -12,6 +20,9 @@ export interface ChatMessage {
   progress?: { current: number; total: number; found: number };
   timestamp: string;
 }
+
+/** Alias kept for backward compatibility */
+export type Message = ChatMessage;
 
 interface ChatStore {
   messages: Record<string, ChatMessage[]>;

@@ -11,9 +11,11 @@ const AGENT_LABELS: Record<AgentType, string> = {
 interface TaskStore {
   tasks: Task[];
   activeTaskId: string | null;
+  canvasVisible: boolean;
   getActiveTask: () => Task | undefined;
   createTask: (agentType: AgentType, description: string, steps: { stepName: string; subAgentType: string }[]) => string;
   setActiveTask: (taskId: string) => void;
+  setCanvasVisible: (visible: boolean) => void;
   updateStepStatus: (taskId: string, stepIndex: number, status: StepStatus) => void;
   saveStepOutput: (taskId: string, stepIndex: number, output: unknown) => void;
   advanceStep: (taskId: string) => { changed: boolean; clearedSteps: number[] };
@@ -28,6 +30,7 @@ function hashOutput(output: unknown): string {
 export const useTaskStore = create<TaskStore>((set, get) => ({
   tasks: [],
   activeTaskId: null,
+  canvasVisible: false,
 
   getActiveTask: () => {
     const { tasks, activeTaskId } = get();
@@ -56,11 +59,14 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
     set((state) => ({
       tasks: [...state.tasks, task],
       activeTaskId: id,
+      canvasVisible: true,
     }));
     return id;
   },
 
   setActiveTask: (taskId) => set({ activeTaskId: taskId }),
+
+  setCanvasVisible: (visible) => set({ canvasVisible: visible }),
 
   updateStepStatus: (taskId, stepIndex, status) =>
     set((state) => ({

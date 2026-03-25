@@ -48,7 +48,7 @@ export default function ReportView() {
   }, []);
 
   return (
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: 16, background: '#08080F', minHeight: '100%' }}>
       <div
         style={{
           display: "flex",
@@ -61,13 +61,13 @@ export default function ReportView() {
       <Space direction="vertical" size={24} style={{ width: "100%" }}>
         {isDataReporter && <TrendChart data={MOCK_TREND} />}
         <EventDistChart data={MOCK_DIST} />
-        <Divider />
+        <Divider style={{ borderColor: 'rgba(255,255,255,0.08)' }} />
         <SpatialHeatmap points={MOCK_HEAT} />
-        <Divider />
+        <Divider style={{ borderColor: 'rgba(255,255,255,0.08)' }} />
         {!isDataReporter && (
           <>
             <DispatchDetail data={MOCK_DISPATCH} />
-            <Divider />
+            <Divider style={{ borderColor: 'rgba(255,255,255,0.08)' }} />
           </>
         )}
         <ReceiverRanking data={MOCK_RANKING} />

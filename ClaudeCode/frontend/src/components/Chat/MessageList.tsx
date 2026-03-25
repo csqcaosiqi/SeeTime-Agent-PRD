@@ -10,7 +10,7 @@ export default function MessageList() {
   const bottomRef = useRef<HTMLDivElement>(null);
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages.length]);
   return (
-    <div style={{ flex: 1, overflow: "auto", padding: "16px" }}>
+    <div style={{ height: '100%', overflow: 'auto', padding: '12px 0' }}>
       {messages.map((msg) => <MessageItem key={msg.id} message={msg} />)}
       <div ref={bottomRef} />
     </div>

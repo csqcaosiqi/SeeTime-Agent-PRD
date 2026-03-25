@@ -35,7 +35,7 @@ export default function DispatchView() {
   const unmatched = dispatches.filter((d) => !d.isAutoMatched).length;
 
   return (
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: 16, background: '#08080F', minHeight: '100%' }}>
       <div
         style={{
           display: "flex",
@@ -44,21 +44,26 @@ export default function DispatchView() {
           marginBottom: 12,
         }}
       >
-        <Typography.Title level={5} style={{ margin: 0 }}>
-          智能派单{" "}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: '#F1F5F9' }}>智能派单</span>
           <Badge
             count={dispatches.length}
-            style={{ backgroundColor: "#1677ff" }}
+            style={{ backgroundColor: "#6366F1" }}
           />
-        </Typography.Title>
-        <Typography.Text type="secondary">点击接收方可手动调整</Typography.Text>
+        </div>
+        <span style={{ fontSize: 12, color: '#475569' }}>点击接收方可手动调整</span>
       </div>
       {unmatched > 0 && (
         <Alert
           message={`${unmatched} 个事件无法自动匹配接收方，请手动指派`}
           type="warning"
           showIcon
-          style={{ marginBottom: 12 }}
+          style={{
+            marginBottom: 12,
+            background: 'rgba(245,158,11,0.1)',
+            border: '1px solid rgba(245,158,11,0.25)',
+            color: '#F59E0B',
+          }}
         />
       )}
       <DispatchTable

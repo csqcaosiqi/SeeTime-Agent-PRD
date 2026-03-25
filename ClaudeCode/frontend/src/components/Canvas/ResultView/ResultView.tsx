@@ -88,15 +88,18 @@ export default function ResultView() {
           alignItems: "center",
           justifyContent: "center",
           height: "100%",
+          background: '#08080F',
+          flexDirection: 'column',
+          gap: 10,
         }}
       >
-        <Empty description="未发现异常事件" />
+        <span style={{ fontSize: 13, color: '#475569' }}>未发现异常事件</span>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: 16, background: '#08080F', minHeight: '100%' }}>
       <div
         style={{
           display: "flex",
@@ -105,16 +108,16 @@ export default function ResultView() {
           marginBottom: 12,
         }}
       >
-        <Typography.Title level={5} style={{ margin: 0 }}>
-          检测结果{" "}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: '#F1F5F9' }}>检测结果</span>
           <Badge
             count={events.length}
-            style={{ backgroundColor: "#1677ff" }}
+            style={{ backgroundColor: "#6366F1" }}
           />
-        </Typography.Title>
-        <Typography.Text type="secondary">
+        </div>
+        <span style={{ fontSize: 12, color: '#475569' }}>
           删除误检卡片，点击标签可修改分类
-        </Typography.Text>
+        </span>
       </div>
       {agentType === "city_patrol" && typeStats.length > 1 && (
         <TypeFilter
