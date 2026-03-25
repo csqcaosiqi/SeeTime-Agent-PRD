@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 import { Result, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useStepFlow } from "../../../hooks/useStepFlow";
 
 export default function ScanningView() {
-  const { currentStep } = useStepFlow();
+  const { currentStep, markWaitingUser } = useStepFlow();
+
+  // Mock: simulate scan completing after 3 seconds
+  useEffect(() => {
+    if (currentStep?.status === "executing") {
+      const timer = setTimeout(() => {
+        markWaitingUser();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentStep?.status]);
 
   if (currentStep?.status === "executing") {
     return (
